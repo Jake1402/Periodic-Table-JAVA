@@ -6,16 +6,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 @SuppressWarnings("serial")
 public class Layout extends JFrame {
+	
+	boolean hide = true;
+	
 	public JFrame jf = new JFrame("Periodic Table | By Jake Watson");
 	
 	public JButton Table = new JButton ("Periodic Table");
@@ -148,6 +152,8 @@ public class Layout extends JFrame {
 	public JButton No = new JButton("No");
 	public JButton Lr = new JButton("Lr");
 
+	public JButton web = new JButton("To Github Page!");
+	private Color NewColor = new Color(120,120,230);
 	
 	final int s = 50;
 	
@@ -205,7 +211,7 @@ public class Layout extends JFrame {
 		jf.add(other_nonmetals);
 		//////////**********sep**************/////////
 		JLabel tranny = new JLabel("Transistional Metals");
-		tranny.setForeground(Color.BLUE);
+		tranny.setForeground(NewColor);
 		tranny.setBounds(220, 695, 250, 30);
 		tranny.setFont(new Font("Schiftbild", Font.BOLD, 25));
 		jf.add(tranny);
@@ -299,7 +305,7 @@ public class Layout extends JFrame {
 				}
 				if(x == 740 && y == 170) {
 					Al.setBounds(x, y, s, s);
-					Al.setBackground(Color.BLUE);
+					Al.setBackground(NewColor);
 					Al.setToolTipText("Atomic Mass : 27, Atomic Number : 13");
 					jf.add(Al);
 				}
@@ -407,12 +413,12 @@ public class Layout extends JFrame {
 				}
 				if(x == 740 && y == 230) {
 					Ga.setBounds(x, y, s, s);
-					Ga.setBackground(Color.BLUE);
+					Ga.setBackground(NewColor);
 					Ga.setToolTipText("Atomic Mass : 70, Atomic Number : 31");
 					jf.add(Ga);
 				}
 				if(x == 800 && y == 230) {
-					Ge.setBounds(x, y, s, s);
+					Ge.setBounds(x-2, y, s+4, s);
 					Ge.setBackground(Color.YELLOW);
 					Ge.setToolTipText("Atomic Mass : 73, Atomic Number : 32");
 					jf.add(Ge);
@@ -515,13 +521,13 @@ public class Layout extends JFrame {
 				}
 				if(x == 740 && y == 290) {
 					In.setBounds(x, y, s, s);
-					In.setBackground(Color.BLUE);
+					In.setBackground(NewColor);
 					In.setToolTipText("Atomic Mass : 115, Atomic Number : 49");
 					jf.add(In);
 				}
 				if(x == 800 && y == 290) {
 					Sn.setBounds(x, y, s, s);
-					Sn.setBackground(Color.BLUE);
+					Sn.setBackground(NewColor);
 					Sn.setToolTipText("Atomic Mass : 119, Atomic Number : 50");
 					jf.add(Sn);
 				}
@@ -623,19 +629,19 @@ public class Layout extends JFrame {
 				}
 				if(x == 740 && y == 350) {
 					Tl.setBounds(x, y, s, s);
-					Tl.setBackground(Color.BLUE);
+					Tl.setBackground(NewColor);
 					Tl.setToolTipText("Atomic Mass : 204, Atomic Number 81");
 					jf.add(Tl);
 				}
 				if(x == 800 && y == 350) {
 					Pb.setBounds(x, y, s, s);
-					Pb.setBackground(Color.BLUE);
+					Pb.setBackground(NewColor);
 					Pb.setToolTipText("Atomic Mass : 201, Atomic Number 82");
 					jf.add(Pb);
 				}
 				if(x == 860 && y == 350) {
 					Bi.setBounds(x, y, s, s);
-					Bi.setBackground(Color.BLUE);
+					Bi.setBackground(NewColor);
 					Bi.setToolTipText("Atomic Mass : 209, Atomic Number : 83");
 					jf.add(Bi);
 				}
@@ -766,7 +772,7 @@ public class Layout extends JFrame {
 					jf.add(Eu);
 				}
 				if(x == 500 && y == 510) {
-					Gd.setBounds(x, y, s, s);
+					Gd.setBounds(x-2, y, s+4, s);
 					Gd.setBackground(Color.LIGHT_GRAY);
 					Gd.setToolTipText("Atomic Mass : 157, Atomic Number : 64");
 					jf.add(Gd);
@@ -905,6 +911,7 @@ public class Layout extends JFrame {
 		about.addActionListener(h);
 		Mol.addActionListener(h);
 		Table.addActionListener(h);
+		web.addActionListener(h);
 		
 		/////******Background image******//////
 			
@@ -922,7 +929,21 @@ public class Layout extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource() == about) {
-				JOptionPane.showMessageDialog(null, "This Periodic Table app was developed by Jake Watson.\n The app was made for personal and educational use. \n \n If you find any issues please email. \n Email: 15watsonj@courtfields.net \n Verion 1.0.0b", "About & Help", 3); 
+				JFrame ah = new JFrame("About & Help");
+				JLabel info = new JLabel("<html>This Periodic Table app was developed by Jake Watson.<br></br> The app was made for personal and educational use. <br></br> <br></br> If you find any issues please email. <br></br> Email: 15watsonj@courtfields.net <br></br> Verion 1.1.0</html>");
+				
+				web.setBounds(5, 100, 135, 25);
+				info.setBounds(5,0,800, 100);
+				
+				ah.add(info);
+				ah.add(web);
+				
+				ah.setSize(370, 165);
+				ah.setLayout(null);
+				ah.setResizable(false);
+				ah.setVisible(true);
+
+				//JOptionPane.showMessageDialog(null, "This Periodic Table app was developed by Jake Watson.\n The app was made for personal and educational use. \n \n If you find any issues please email. \n Email: 15watsonj@courtfields.net \n Verion 1.1.0", "About & Help", 3); 
 			}
 			if(e.getSource() == Mol) {
 				//JOptionPane.showMessageDialog(null, "In development - Sorry", "Molar calculator", 0);
@@ -931,6 +952,13 @@ public class Layout extends JFrame {
 			}
 			if(e.getSource() == Table) {
 				JOptionPane.showMessageDialog(null, "This is the Periodic Table. \n It holds all known elements.\n - Some elements are not included.\n - Most Atomic Numbers & Weights are\n   based on averages and most stable\n   isotopes.", "Periodic Table", 1);
+			}
+			if(e.getSource() == web) {
+				try {
+					   Desktop.getDesktop().browse(new URL("https://github.com/Jake1402?tab=repositories").toURI());
+					} catch (Exception e1) {
+					     e1.printStackTrace();
+					}
 			}
 		}
 	}
