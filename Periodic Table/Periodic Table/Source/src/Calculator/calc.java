@@ -23,9 +23,10 @@ public class calc extends JFrame{
 	private JFrame scene = new JFrame("Molar Calculator");
 	
 	private JButton clear = new JButton("Ce");
+	private JButton back = new JButton("←");
 	private JButton openBracket = new JButton("(");
 	private JButton closeBracket = new JButton(")");
-	private JButton divide = new JButton("�");
+	private JButton divide = new JButton("÷");
 	
 	private JButton seven = new JButton("7");
 	private JButton eight = new JButton("8");
@@ -59,8 +60,13 @@ public class calc extends JFrame{
 				}
 				if(x == 10 && y == 90) {
 					scene.add(clear);
-					clear.setBounds(x,y, 80, 70);
+					clear.setBounds(x,y, 80, 35);
 					clear.setFont(new Font("Schriftbild", Font.BOLD, 25));
+				}
+				if(x == 10 && y == 125) {
+					scene.add(back);
+					back.setBounds(x, y, 80, 35);
+					back.setFont(new Font("Schriftbild", Font.BOLD, 25));
 				}
 				if(x == 100 && y == 90) {
 					scene.add(openBracket);
@@ -162,6 +168,7 @@ public class calc extends JFrame{
 		
 		handler react = new handler();
 		clear.addActionListener(react);
+		back.addActionListener(react);
 		openBracket.addActionListener(react);
 		closeBracket.addActionListener(react);
 		divide.addActionListener(react);
@@ -200,9 +207,11 @@ public class calc extends JFrame{
 	private class handler implements ActionListener{
 
 		String answerString = "";
+		String Save[] = new String[160000000];
+
+		int pos = 1;
 		
 		private final String MOL = Double.toString(6.02*Math.pow(10, 23));
-		//private final String MOL = Double.toString(_Mol_);
 		
 		public void actionPerformed(ActionEvent e) {
 			
@@ -210,76 +219,125 @@ public class calc extends JFrame{
 				answerString = "";
 				result.setText(answerString);
 			}
+			if(e.getSource() == back) {
+				pos-=1;
+				if(pos<0) {
+					pos=0;
+				}
+				answerString = Save[pos];
+				if(answerString == null) {
+					answerString = "";
+				}
+				result.setText(answerString);
+			}
 			if(e.getSource() == openBracket) {
 				answerString = answerString + "(";
+				
+				pos+=1;
+				Save[pos] = answerString;
+				
 				result.setText(answerString);
 			}
 			if(e.getSource() == closeBracket) {
 				answerString = answerString + ")";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == divide) {
 				answerString = answerString + "/";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == seven) {
 				answerString = answerString + "7";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == eight) {
 				answerString = answerString + "8";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == nine) {
 				answerString = answerString + "9";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == mult) {
 				answerString = answerString + "*";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == four) {
 				answerString = answerString + "4";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == five) {
 				answerString = answerString + "5";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == six) {
 				answerString = answerString + "6";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == minus) {
 				answerString = answerString + "-";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == one) {
 				answerString = answerString + "1";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == two) {
 				answerString = answerString + "2";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == three) {
 				answerString = answerString + "3";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == plus) {
 				answerString = answerString + "+";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == Mol) {
 				answerString = answerString + MOL;
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == zero) {
 				answerString = answerString + "0";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == _float_) {
 				answerString = answerString + ".";
+				pos+=1;
+				Save[pos] = answerString;
 				result.setText(answerString);
 			}
 			if(e.getSource() == equals) {
@@ -290,7 +348,7 @@ public class calc extends JFrame{
 						Object answerEngine = engine.eval(answerString);
 						answerString = answerEngine.toString();
 						if(answerString == "Infinity") {
-							answerString = "> than infinity stones";
+							answerString = "Bigger than 2^64";
 							result.setText(answerString);
 						}
 						result.setText(answerString);
