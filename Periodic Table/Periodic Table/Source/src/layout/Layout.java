@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 @SuppressWarnings("serial")
-public class Layout extends JFrame {
+public class Layout extends JFrame implements Runnable  {
 	
 	boolean hide = true;
 	
@@ -157,7 +157,7 @@ public class Layout extends JFrame {
 	
 	final int s = 50;
 	
-	public Layout(){
+	public void Setup(){
 		Table.setBounds(0,0,376,30);
 		Mol.setBounds(376, 0, 376, 30);
 		about.setBounds(376*2, 0, 376, 30);
@@ -961,5 +961,9 @@ public class Layout extends JFrame {
 					}
 			}
 		}
+	}
+	
+	public void run() {
+		Setup();
 	}
 }
